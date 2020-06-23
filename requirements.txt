@@ -6,4 +6,3 @@ pandas
 pymysql
 yfinance
 stripe
-email
