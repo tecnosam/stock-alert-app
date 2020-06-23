@@ -1,0 +1,16 @@
+{
+    "name": "OPENSTOCK",
+    "short_name": "openstock",
+    "theme_color": "#0000ff",
+    "background_color": "#000000",
+    "display": "standalone",
+    "start_url": "/",
+    "description": "An application that helps you check the stock market for updates and alerts you if its desirable for you to sell or buy stock",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "assets/images/big/auth-bg.jpg",
+            "sizes": "2000x2000"
+        }
+    ]
+}

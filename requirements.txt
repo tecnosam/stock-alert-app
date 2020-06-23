@@ -1,0 +1,9 @@
+gunicorn
+flask
+flask-socketio
+numpy
+pandas
+pymysql
+yfinance
+stripe
+email

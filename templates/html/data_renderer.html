@@ -1,0 +1,103 @@
+{%extends "html/base.html"%}
+
+{%block _title%}{{func.upper()}} CONDITIONS{%endblock%}
+
+{%block content%}
+<script>
+    const klass = `{{func}}`;
+</script>
+<div class="row">
+    <div>
+        {%for alert in get_flashed_messages(with_categories = True)%}
+            <div class="alert alert-secondary alert-dismissible bg-{{alert[0]}} text-white border-0 fade show" role="alert">
+                <button type = "button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+                        {{alert[1]}}
+            </div>
+        {%endfor%}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-4">
+        <h2 class="mb-0">TICKERS</h2>
+        <p class="text-muted mt-0 font-16">
+            {{func.upper()}} CONDITIONS
+        </p>
+    </div>
+    {% for stock in stocks[::-1] %}
+    <div class="col-md-6" id="stock-{{stock.id}}">
+        <div class="card text-white bg-dark">
+            <div class="card-header">
+                <h3 class="mb-0 text-white bg-dark text-uppercase"> {{ stock['name'] }} </h3>
+            </div>
+            <div class="card-body">
+
+                <!-- Deletes stock button -->
+                <a onclick="del_watcher(`{{stock.id}}`)" class="btn btn-primary">Delete Watcher</a>
+                <a data-toggle="modal" data-target="#edit-stock-{{stock.mid}}" class="btn btn-primary">Edit Watcher</a>
+
+                
+                <div id="edit-stock-{{stock['mid']}}" class="modal fade" tabindex="-1" role="dialog" style="display: none; color: black;" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <div class="text-center mt-2 mb-4">
+                                    <h2 class="text-uppercase">EDIT CONDITIONS FOR {{stock.name}}</h2>
+                                </div>
+                                <form class="pl-3 pr-3" method="POST" action="{{url_for('edit_watcher', klass = func, symb = stock['name'])}}">
+
+                                    <div class="form-group">
+                                        <label for="name">Opening Price</label>
+                                        <input class="form-control" value="{{stock.open}}" type="number" name="open" id="open" required="" placeholder="Opening Price...">
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="close">Closing Price</label>
+                                        <input class="form-control" value="{{stock.close}}" type="number" name="close" id="close" placeholder="Closing Price...">
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="high">High Price</label>
+                                        <input class="form-control" value="{{stock.high}}" type="number" name="high" id="high" placeholder="Highest Price...">
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="low">Low Price</label>
+                                        <input class="form-control" value="{{stock.low}}" type="number" name="low" id="low" placeholder="Lowest Price...">
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="dividends">Dividend</label>
+                                        <input class="form-control" value="{{stock.dividends}}" type="number" name="dividends" id="dividends" placeholder="Dividends...">
+                                    </div>
+                                    <br>
+                            
+                                    <div class="form-group">
+                                        <label for="splits">Splits</label>
+                                        <input class="form-control" value="{{stock.splits}}" type="number" name="splits" id="splits" placeholder="Splits...">
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{%endblock%}

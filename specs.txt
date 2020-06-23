@@ -1,0 +1,5 @@
+Return on assets (ROA) = (net income)/(average total assets)
+
+Return on Equity (ROA) = (net income)/(Shareholders Equity)
+
+Net profit margin = (net profit)/(revenue)

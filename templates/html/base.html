@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>OPENSTOCK - {%block _title%}{%endblock%}</title>
+    <meta name="author" content="">
+    <link rel="manifest" href="{{url_for('static', filename = 'manifest.json')}}" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename = 'assets/images/favicon.png')}}">
+    <!-- Custom CSS -->
+    <link href="{{url_for('static', filename = 'assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{{url_for('static', filename = 'dist/css/style.min.css')}}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+    <script>
+        
+        String.prototype.format = function() {
+            var i = 0, arg = arguements;
+            return this.replace(/{}/g, function() {
+                return typeof args[i] != 'undefined' ? args[i++] : '';
+            });
+        };
+
+    </script>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {%block pheripheral%}
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-brand">
+                        <!-- Logo icon -->
+                        <a href="#">
+                            <!-- <b class="logo-icon"> -->
+                                <!-- Dark Logo icon -->
+                                <!-- <img src="{{url_for('static', filename = 'assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" /> -->
+                                <!-- Light Logo icon -->
+                                <!-- <img src="{{url_for('static', filename = 'assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" /> -->
+                            <!-- </b> -->
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <!-- <span class="logo-text"> -->
+                                <!-- dark Logo text -->
+                                <h2 class="mb-0 logo-text text-uppercase">openstock</h2>
+                                <!-- <img src="{{url_for('static', filename = 'assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" /> -->
+                                <!-- Light Logo text -->
+                                <!-- <img src="{{url_for('static', filename = 'assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /> -->
+                            <!-- </span> -->
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <li class="nav-small-cap">
+                        <span class="hide-menu">
+                            {{session['name']}}
+                        </span>
+                    </li>
+                    <ul id="sidebarnav">
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">WATCHER CONDITIONS</span></li>
+                        <!-- BUYING CONDITIONS -->
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                aria-expanded="false">
+                                <i data-feather="file-text" class="feather-icon"></i>
+                                <span class="hide-menu">BUYING </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a data-toggle="modal" data-target="#add-buy" class="sidebar-link">
+                                        <span class="hide-menu"> New</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{url_for('view', func='buying')}}" class="sidebar-link">
+                                        <span class="hide-menu"> View & Edit</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /BUYING CNDITIONS -->
+                        <!-- SELLING CONDITIONS -->
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                aria-expanded="false">
+                                <i data-feather="file-text" class="feather-icon"></i>
+                                <span class="hide-menu">SELLING </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a data-toggle="modal" data-target="#add-sell" class="sidebar-link">
+                                        <span class="hide-menu"> New</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{url_for('view', func='selling')}}" class="sidebar-link">
+                                        <span class="hide-menu"> View & Edit</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /SELLING CNDITIONS -->
+                        <!-- TRADING CONDITIONS -->
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                aria-expanded="false">
+                                <i data-feather="file-text" class="feather-icon"></i>
+                                <span class="hide-menu">TRADING </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a data-toggle="modal" data-target="#add-trade" class="sidebar-link">
+                                        <span class="hide-menu"> New</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{url_for('view', func='curious')}}" class="sidebar-link">
+                                        <span class="hide-menu"> View & Edit</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /TRADING CNDITIONS -->
+
+
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">PERSONAL</span></li>
+                        <!-- Logout -->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" data-toggle="modal" data-target="#edit-profile"
+                                aria-expanded="false">
+                                <i data-feather="edit" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu">Edit Profile
+                                </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="{{url_for('logout')}}"
+                                aria-expanded="false">
+                                <i data-feather="log-out" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu">Logout
+                                </span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                aria-expanded="false">
+                                <i data-feather="file-text" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu">View Checklist </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                {%for site in sites%}
+                                <li class="sidebar-item">
+                                    <a href="{{url_for('site_checklist', site = site)}}" class="sidebar-link">
+                                        <span
+                                            class="hide-menu"> {{site}}
+                                        </span></a>
+                                </li>
+                                {%endfor%}
+                            </ul> -->
+                        </li>
+                        <li class="list-divider"></li>
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        {%endblock%}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class = "page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- TODO: CHANGE TICKER INPUT IN FORM FROM TEXT INPUT TO DRPODOWN -->
+            <div class="container-fluid">
+                {%if session['activation'] == False%}
+                <div class="alert alert-secondary alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                        Your account subscription is expired, meaning that you wont recieve any stock market
+                        updates.
+                    <form method="POST" action="{{url_for('pay')}}">
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="{{pub_key}}"
+                        data-amount="3000"
+                        data-name="OPENSTOCK"
+                        data-description="Only $30 for 31 days"
+                        data-locale = 'auto'
+                        ></script>
+                    </form>
+                </div>
+                {%endif%}
+                {%block content%}
+                {%endblock%}
+            </div>
+            <div id="add-sell" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="text-center mt-2 mb-4">
+                                <h2 class="text-uppercase">SELLING STOCK CONDITIONS</h2>
+                            </div>
+                            
+                            <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'selling')}}">
+
+                                <div class="form-group">
+                                    <label for="name">Ticker</label>
+                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="name">Opening Price</label>
+                                    <input class="form-control" type="number" name="open" id="open" required="" placeholder="Opening Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="close">Closing Price</label>
+                                    <input class="form-control" type="number" name="close" id="close" placeholder="Closing Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="high">High Price</label>
+                                    <input class="form-control" type="number" name="high" id="high" placeholder="Highest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="low">Low Price</label>
+                                    <input class="form-control" type="number" name="low" id="low" placeholder="Lowest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="dividends">Dividend</label>
+                                    <input class="form-control" type="number" name="dividends" id="dividends" placeholder="Dividends...">
+                                </div>
+                                <br>
+                        
+                                <div class="form-group">
+                                    <label for="splits">Splits</label>
+                                    <input class="form-control" type="number" name="splits" id="splits" placeholder="Splits...">
+                                </div>
+                                <br>
+
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary" type="submit">Create</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <div id="add-buy" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="text-center mt-2 mb-4">
+                                <h2 class="text-uppercase">BUYING STOCK CONDITIONS</h2>
+                            </div>
+                            
+                            <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'buying')}}">
+
+                                <div class="form-group">
+                                    <label for="name">Ticker</label>
+                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="open">Opening Price</label>
+                                    <input class="form-control" type="number" name="open" id="open" required="" placeholder="Opening Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="close">Closing Price</label>
+                                    <input class="form-control" type="number" name="close" id="close" placeholder="Closing Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="high">High Price</label>
+                                    <input class="form-control" type="number" name="high" id="high" placeholder="Highest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="low">Low Price</label>
+                                    <input class="form-control" type="number" name="low" id="low" placeholder="Lowest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="dividends">Dividend</label>
+                                    <input class="form-control" type="number" name="dividends" id="dividends" placeholder="Dividends...">
+                                </div>
+                                <br>
+                        
+                                <div class="form-group">
+                                    <label for="splits">Splits</label>
+                                    <input class="form-control" type="number" name="splits" id="splits" placeholder="Splits...">
+                                </div>
+                                <br>
+
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary" type="submit">Create</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <div id="add-trade" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="text-center mt-2 mb-4">
+                                <h2 class="text-uppercase">OTHER STOCK CONDITIONS</h2>
+                            </div>
+                            
+                            <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'curious')}}">
+
+                                <div class="form-group">
+                                    <label for="name">Ticker</label>
+                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="name">Opening Price</label>
+                                    <input class="form-control" type="number" name="open" id="open" required="" placeholder="Opening Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="close">Closing Price</label>
+                                    <input class="form-control" type="number" name="close" id="close" placeholder="Closing Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="high">High Price</label>
+                                    <input class="form-control" type="number" name="high" id="high" placeholder="Highest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="low">Low Price</label>
+                                    <input class="form-control" type="number" name="low" id="low" placeholder="Lowest Price...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="dividends">Dividend</label>
+                                    <input class="form-control" type="number" name="dividends" id="dividends" placeholder="Dividends...">
+                                </div>
+                                <br>
+                        
+                                <div class="form-group">
+                                    <label for="splits">Splits</label>
+                                    <input class="form-control" type="number" name="splits" id="splits" placeholder="Splits...">
+                                </div>
+                                <br>
+
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary" type="submit">Create</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <div id="edit-profile" class="modal fade" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="text-center mt-2 mb-4">
+                                <h2 class="text-uppercase">EDIT YOUR INFO</h2>
+                            </div>
+                            <form class="pl-3 pr-3" method="POST" action="{{url_for('edit_usr')}}">
+
+                                <div class="form-group">
+                                    <label for="name">Full name</label>
+                                    <input class="form-control" value="{{session.name}}" type="text" name="name" id="name" required="" placeholder="Full name...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input class="form-control" value="{{session.email}}" type="email" name="email" id="email" required="" placeholder="Email Address...">
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <label for = "pwd">Password</label>
+                                    <input class="form-control" value="{{session.pwd}}" name="pwd" type="text" id="pwd" placeholder="Input a password">
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <!-- <footer class="footer text-center text-muted">
+                All Rights Reserved by Adminmart. Designed and Developed by Abolo Samuel
+            </footer> -->
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <audio id="alert-tone" hidden controls="controls">
+        <source type="audio/mp3" src="{{url_for('static', filename = 'deduction.mp3')}}">
+    </audio>
+    <script>
+        const uid = `{{session['uid']}}`
+    </script>
+    
+    {%block scripts%}
+    <script src="{{url_for('static', filename = 'assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="{{url_for('static', filename = 'dist/js/app-style-switcher.js')}}"></script>
+    <script src="{{url_for('static', filename = 'dist/js/feather.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'dist/js/sidebarmenu.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{url_for('static', filename = 'dist/js/custom.min.js')}}"></script>
+    <!--This page JavaScript -->
+    <script src="{{url_for('static', filename = 'assets/extra-libs/c3/d3.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'assets/extra-libs/c3/c3.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'dist/js/pages/dashboards/dashboard1.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'socket.io.js')}}"></script>
+    <script src="{{url_for('static', filename = 'socket.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename = 'voice-recognition.js')}}"></script> -->
+    <!-- <script src="{{url_for('static', filename = 'sw.js')}}"></script> -->
+    
+			<script>
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker
+                    .register('/sw.js')
+                    .then(function(registration) {
+                        console.log('Tweedler: Service Worker Registered! Yay.');
+                        return registration;
+                    })
+                    .catch(function(err) {
+                        console.error('Tweedler: Unable to register service worker.', err);
+                    });
+                }
+        </script>
+    <!-- <script src="{{url_for('static', filename = 'socket.io.js')}}"></script>
+    <script src="{{url_for('static', filename = 'socket.js')}}"></script> -->
+    
+    <!-- <script src="{{url_for('static', filename = 'install.js')}}"></script> -->
+    <script>
+      function click(url) {
+        alert(url)
+        /*$.ajax({
+          url: "/bookmark/"+ url,
+          success: function(data){
+            $(this).css("color", "purple")
+          }
+        })*/
+        
+      }
+    </script>
+    {%endblock%}
+</body>
+
+</html>
