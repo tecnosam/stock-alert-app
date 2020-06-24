@@ -49,7 +49,7 @@ class Notification:
             message = message_template.substitute(name=dat[1].title(), symbol = symbol)
 
             # setup the parameters of the message
-            msg['From']=self.MY_ADDRESS
+            msg['From']="Abolo Samuel <%s>" % self.MY_ADDRESS
             msg['To']=dat[2]
             msg['Subject']= f"Alert from OPENSTOCK"
         
