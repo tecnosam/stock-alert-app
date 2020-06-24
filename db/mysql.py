@@ -3,8 +3,8 @@ import sys, os
 
 class Connection:
     def __init__(self, 
-        host = 'bettvvsh68mdzbgpxzok-mysql.services.clever-cloud.com', 
-        usr = 'uf2gmxo3zqy4dshr', pwd = 'HPvc12oXBloIEkRPKL3i', db = "bettvvsh68mdzbgpxzok"):
+        host = 'nnmeqdrilkem9ked.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 
+        usr = 'zamylucdxp90omle', pwd = 'nyg7yxh6ecs90w9k', db = "lk8ls4vwvv7rl3ic"):
         self.db = DBAdapter.connect( host, usr, pwd, db )
         #self.db = DBAdapter.connect( "localhost", "root", "", "openstock" )
     

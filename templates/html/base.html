@@ -537,6 +537,19 @@
     <script src="{{url_for('static', filename = 'dist/js/pages/dashboards/dashboard1.min.js')}}"></script>
     <script src="{{url_for('static', filename = 'socket.io.js')}}"></script>
     <script src="{{url_for('static', filename = 'socket.js')}}"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+        appId: "0a949259-e2d7-43f2-b89a-13c92763804f",
+        notifyButton: {
+            enable: true,
+        },
+        subdomainName: "openstock",
+        });
+    });
+    </script>
     <!-- <script src="{{url_for('static', filename = 'voice-recognition.js')}}"></script> -->
     <!-- <script src="{{url_for('static', filename = 'sw.js')}}"></script> -->
     
@@ -568,6 +581,13 @@
         })*/
         
       }
+    </script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        OneSignal.push(function () {
+            OneSignal.showHttpPrompt();
+        });
+
     </script>
     {%endblock%}
 </body>

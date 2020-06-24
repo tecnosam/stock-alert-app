@@ -5,6 +5,8 @@
     "background_color": "#000000",
     "display": "standalone",
     "start_url": "/",
+    "gcm_sender_id": "482941778795",
+    "gcm_sender_id_comment": "Do not change the GCM Sender ID",
     "description": "An application that helps you check the stock market for updates and alerts you if its desirable for you to sell or buy stock",
     "orientation": "any",
     "icons": [
