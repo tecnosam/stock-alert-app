@@ -19,7 +19,7 @@ pub_key = 'pk_test_PX8gQIxfzI6HvZPODMzhAQlt00xMOZRz4z'
 
 stripe.api_key = 'sk_test_6iiKSV7F68X3AvRGPf32l2p300y05YslWf'
 
-__stocks__ = pd.read_csv("stocks.csv")
+s_l = pd.read_csv("stocks.csv")
 
 def compute_activated(x):
     y = pd.to_datetime( dt.now() )
@@ -104,7 +104,7 @@ def view(func):
     else:
         return redirect(url_for("login"))
     stocks = obj.check( session['uid'] )
-    return render_template("html/data_renderer.html", pub_key = pub_key, __stocks__ = __stocks__, stocks = stocks, func = func)
+    return render_template("html/data_renderer.html", pub_key = pub_key, s_l = s_l, stocks = stocks, func = func)
 
 @app.route("/add/<type_>", methods = ['POST'])
 def add_cond(type_):

@@ -279,7 +279,7 @@
                                 <div class="form-group">
                                     <label for = "name">Stock Ticker/Symbol</label>
                                     <select class="custom-select mr-sm-2" name="name" id="name" required>
-                                        {% for key,value in __stocks__.iterrows() %}
+                                        {% for key,value in s_l.iterrows() %}
                                             <option value="{{value['Symbol']}}">
                                                 {{value['Symbol']}} {{value['Name']}}
                                             </option>
@@ -350,7 +350,7 @@
                                 <div class="form-group">
                                     <label for="name">Stock Ticker/Symbol</label>
                                     <select class="custom-select mr-sm-2" name="name" id="name" required>
-                                        {% for key,value in __stocks__.iterrows() %}
+                                        {% for key,value in s_l.iterrows() %}
                                             <option value="{{value['Symbol']}}">
                                                 {{value['Symbol']}} {{value['Name']}}
                                             </option>
@@ -421,7 +421,7 @@
                                 <div class="form-group">
                                     <label for="name">Stock Ticker/Symbol</label>
                                     <select class="custom-select mr-sm-2" name="name" id = "name" required>
-                                        {% for key,value in __stocks__.iterrows() %}
+                                        {% for key,value in s_l.iterrows() %}
                                             <option value="{{value['Symbol']}}">
                                                 {{value['Symbol']}} {{value['Name']}}
                                             </option>
