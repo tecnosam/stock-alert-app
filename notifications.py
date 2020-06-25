@@ -31,8 +31,8 @@ class Notification:
     def __init__(self):
         self.MY_ADDRESS = 'ikabolo59'
         self.PASSWORD = 'ikechukwu1023'
-        self.s = smtplib.SMTP_SSL('smtp.gmail.com')
-        self.s.login(self.MY_ADDRESS, self.PASSWORD)
+        # self.s = smtplib.SMTP_SSL('smtp.gmail.com')
+        # self.s.login(self.MY_ADDRESS, self.PASSWORD)
     def ping(self, email):
         pass
     def bulk(self, uids, symbol, theme = "trade"):
@@ -44,16 +44,16 @@ class Notification:
             dat = fetch_user_data( uid[0] )
             if ( compute_activated( dat[4] ) != True ):
                 continue
-            msg = MIMEMultipart()
+            # msg = MIMEMultipart()
             # create a message
             message = message_template.substitute(name=dat[1].title(), symbol = symbol)
 
             # setup the parameters of the message
-            msg['From']="Abolo Samuel <%s>" % self.MY_ADDRESS
-            msg['To']=dat[2]
-            msg['Subject']= f"Alert from OPENSTOCK"
+            # msg['From']="Abolo Samuel <%s>" % self.MY_ADDRESS
+            # msg['To']=dat[2]
+            # msg['Subject']= f"Alert from OPENSTOCK"
         
-            msg.attach(MIMEText(message, 'plain'))
+            # msg.attach(MIMEText(message, 'plain'))
             # th = Thread(target = self.s.send_message, args = [msg])
             # th.start()
             th = Thread(target = send_simple_message, args = (message, dat[1], dat[2]))
