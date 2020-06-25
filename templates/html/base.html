@@ -277,8 +277,15 @@
                             <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'selling')}}">
 
                                 <div class="form-group">
-                                    <label for="name">Ticker</label>
-                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                    <label for = "name">Stock Ticker/Symbol</label>
+                                    <select class="custom-select mr-sm-2" name="name" id="name" required>
+                                        {% for key,value in __stocks__.iterrows() %}
+                                            <option value="{{value['Symbol']}}">
+                                                {{value['Symbol']}} {{value['Name']}}
+                                            </option>
+                                        {%endfor%}
+                                    </select>
+                                    <!-- <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol..."> -->
                                 </div>
                                 <br>
 
@@ -341,8 +348,15 @@
                             <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'buying')}}">
 
                                 <div class="form-group">
-                                    <label for="name">Ticker</label>
-                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                    <label for="name">Stock Ticker/Symbol</label>
+                                    <select class="custom-select mr-sm-2" name="name" id="name" required>
+                                        {% for key,value in __stocks__.iterrows() %}
+                                            <option value="{{value['Symbol']}}">
+                                                {{value['Symbol']}} {{value['Name']}}
+                                            </option>
+                                        {%endfor%}
+                                    </select>
+                                    <!-- <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol..."> -->
                                 </div>
                                 <br>
 
@@ -405,8 +419,15 @@
                             <form class="pl-3 pr-3" method="POST" action="{{url_for('add_cond', type_ = 'curious')}}">
 
                                 <div class="form-group">
-                                    <label for="name">Ticker</label>
-                                    <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol...">
+                                    <label for="name">Stock Ticker/Symbol</label>
+                                    <select class="custom-select mr-sm-2" name="name" id = "name" required>
+                                        {% for key,value in __stocks__.iterrows() %}
+                                            <option value="{{value['Symbol']}}">
+                                                {{value['Symbol']}} {{value['Name']}}
+                                            </option>
+                                        {%endfor%}
+                                    </select>
+                                    <!-- <input class="form-control" type="text" name="name" id="name" required="" placeholder="Stock ticker/Symbol..."> -->
                                 </div>
                                 <br>
 
