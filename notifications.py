@@ -7,14 +7,14 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-# def send_simple_message():
-#     	return requests.post(
-# 		"https://api.mailgun.net/v3/sandbox3cc88e9992e249a2af4775be86df605e.mailgun.org/messages",
-# 		auth=("api", "2c20989f75117fdea19a0e2866beb72e-1b6eb03d-5b6a4edc"),
-# 		data={"from": "Mailgun Sandbox <postmaster@sandbox3cc88e9992e249a2af4775be86df605e.mailgun.org>",
-# 			"to": "Abolo Samuel <ikabolo59@gmail.com>",
-# 			"subject": "Hello Abolo Samuel",
-# 			"text": "Congratulations Abolo Samuel, you just sent an email with Mailgun!  You are truly awesome!"})
+def send_simple_message(msg, recv, recv_email):
+    	return requests.post(
+		"https://api.mailgun.net/v3/sandbox3cc88e9992e249a2af4775be86df605e.mailgun.org/messages",
+		auth=("api", "2c20989f75117fdea19a0e2866beb72e-1b6eb03d-5b6a4edc"),
+		data={"from": "OPENSTOCK's Mailgun <postmaster@sandbox3cc88e9992e249a2af4775be86df605e.mailgun.org>",
+			"to": f"{recv} <{recv_email}>",
+			"subject": "Stock Alert",
+			"text": msg})
 
 def read_template(filename):
     """
@@ -54,7 +54,9 @@ class Notification:
             msg['Subject']= f"Alert from OPENSTOCK"
         
             msg.attach(MIMEText(message, 'plain'))
-            th = Thread(target = self.s.send_message, args = [msg])
+            # th = Thread(target = self.s.send_message, args = [msg])
+            # th.start()
+            th = Thread(target = send_simple_message, args = (message, dat[1], dat[2]))
             th.start()
             print("Sending...")
             del msg
