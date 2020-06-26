@@ -59,6 +59,6 @@ class Notification:
             th = Thread(target = send_simple_message, args = (message, dat[1], dat[2]))
             th.start()
             print("Sending...")
-            del msg
+            # del msg
         # self.s.quit()
     
