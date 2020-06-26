@@ -1,0 +1,1 @@
+Hi $name, $symbol has been delisted. The watcher for $symbol has been automatically deleted

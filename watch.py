@@ -43,11 +43,15 @@ class Watch:
                     if (i not in self.prev_hist):
                         if ( len(hist) > 0 ):
                             self.resolve_movers(hist, i)
+                        else:
+                            self.handle_delisted( i )
                         self.prev_hist[i] = hist
                     else:
                         if ( np.any(hist.reset_index(drop=True) != self.prev_hist[i].reset_index(drop=True)) == True ):
                             if ( len(hist) > 0 ):
                                 self.resolve_movers(hist, i)
+                            else:
+                                self.handle_delisted( i )
                             self.prev_hist[i] = hist
             except KeyboardInterrupt:
                 print("#> TERMINATING STOCK API PIPELINE... ")
@@ -57,6 +61,22 @@ class Watch:
             except requests.exceptions.ConnectionError:
                 print("### COULD NOT CONNECT TO STOCK MARKET API\n#> RETRYING... ")
 
+    def handle_delisted(self, symbol = ""):
+        # method to resolve those that have seen their conditions
+        # info = ticker.info
+        selling = self.exec_delisted( 'sell',symbol )
+        buying = self.exec_delisted( 'buy', symbol )
+        trading = self.exec_delisted( 'trade', symbol )
+        # print("Sellers: ", selling)
+        # print("Buyers: ", buying)
+        # print("Others: ", trading)
+
+        t1 = Thread(target = self.notif.bulk, args = (selling, symbol, 'delisted'))
+        t1.start()
+        t2 = Thread(target = self.notif.bulk, args = (buying, symbol, 'delisted'))
+        t2.start()
+        t3 = Thread(target = self.notif.bulk, args = (trading, symbol, 'delisted'))
+        t3.start()
     def resolve_movers(self, req, symbol = ""):
         # method to resolve those that have seen their conditions
         # info = ticker.info
@@ -67,12 +87,20 @@ class Watch:
         # print("Buyers: ", buying)
         # print("Others: ", trading)
 
-        t1 = Thread(target = self.notif.bulk, args = (selling, symbol))
+        t1 = Thread(target = self.notif.bulk, args = (selling, symbol, 'selling'))
         t1.start()
-        t2 = Thread(target = self.notif.bulk, args = (buying, symbol))
+        t2 = Thread(target = self.notif.bulk, args = (buying, symbol, 'buying'))
         t2.start()
-        t3 = Thread(target = self.notif.bulk, args = (trading, symbol))
+        t3 = Thread(target = self.notif.bulk, args = (trading, symbol, 'trade'))
         t3.start()
+    def exec_delisted(self, tbl, symb):
+        sql = f"SELECT `uid` FROM `%s` WHERE `name`='{symb}'" % tbl
+        try:
+            uids = self.db.get(sql)
+            self.db.set(f"DELETE FROM `%s` WHERE `name`='{symb}'" % tbl)
+            return uids
+        except Exception as e:
+            raise e
     def exec_sql( self, tbl, req, symbol, arith_meth = "greater" ):
         if ( arith_meth == "greater" ):
             sql = """

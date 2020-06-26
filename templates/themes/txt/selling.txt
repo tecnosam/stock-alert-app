@@ -1,1 +1,1 @@
-Hi $name, $symbol has reached your desired conditions for trade.
+Hi $name, $symbol has reached your desired conditions to sell.
