@@ -74,13 +74,13 @@
 
                                     <div class="form-group">
                                         <label for="dividends">Dividend</label>
-                                        <input class="form-control" value="{{stock.dividends}}" type="number" name="dividends" id="dividends" placeholder="Dividends...">
+                                        <input class="form-control" value="{{stock.dividends}}" type="number" name="dividends" min="0" step="any" id="dividends" placeholder="Dividends...">
                                     </div>
                                     <br>
                             
                                     <div class="form-group">
                                         <label for="splits">Splits</label>
-                                        <input class="form-control" value="{{stock.splits}}" type="number" name="splits" id="splits" placeholder="Splits...">
+                                        <input class="form-control" value="{{stock.splits}}" type="number" min="0" step="any" name="splits" id="splits" placeholder="Splits...">
                                     </div>
                                     <br>
 
