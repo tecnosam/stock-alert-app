@@ -43,6 +43,7 @@ class Watch:
                     if (i not in self.prev_hist):
                         if ( len(hist) > 0 ):
                             self.resolve_movers(hist, i)
+                            self.prev_hist[i] = hist.iloc[-1].to_dict()
                         else:
                             self.handle_delisted( i )
                         self.prev_hist[i] = hist.iloc[-1].to_dict()
@@ -50,9 +51,9 @@ class Watch:
                         if ( hist.iloc[-1].to_dict() != self.prev_hist[i] ):
                             if ( len(hist) > 0 ):
                                 self.resolve_movers(hist, i)
+                                self.prev_hist[i] = hist
                             else:
                                 self.handle_delisted( i )
-                            self.prev_hist[i] = hist
             except KeyboardInterrupt:
                 print("#> TERMINATING STOCK API PIPELINE... ")
                 run_event.clear()
