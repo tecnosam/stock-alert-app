@@ -45,7 +45,7 @@ class Watch:
                             self.resolve_movers(hist, i)
                         self.prev_hist[i] = hist
                     else:
-                        if ( np.any(hist != self.prev_hist[i]) == True ):
+                        if ( np.any(hist.reset_index(drop=True) != self.prev_hist[i].reset_index(drop=True)) == True ):
                             if ( len(hist) > 0 ):
                                 self.resolve_movers(hist, i)
                             self.prev_hist[i] = hist
