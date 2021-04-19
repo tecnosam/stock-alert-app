@@ -232,7 +232,7 @@ def fetch_user_data(uid):
 	return res
 
 def reactivate_usr( uid ):
-	sql = f"UPDATE users SET `activation`=now()"
+	sql = f"UPDATE users SET `activation`=now() WHERE `uid`={uid}"
 	db = Connection()
 	try:
 		res = db.set( sql )
